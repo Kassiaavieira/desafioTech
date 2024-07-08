@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 interface CreateInvestmentFormProps {
-  addInvestment: (investment: any) => void; // Defina o tipo correto para investment
+  addInvestment: (investment: any) => void;
 }
 
 const CreateInvestmentForm: React.FC<CreateInvestmentFormProps> = ({ addInvestment }) => {
@@ -21,8 +21,7 @@ const CreateInvestmentForm: React.FC<CreateInvestmentFormProps> = ({ addInvestme
       date,
       initialValue,
     };
-    addInvestment(newInvestment); // Chame a função addInvestment
-    // Limpar campos ou outras lógicas necessárias após adicionar o investimento
+    addInvestment(newInvestment);
     setOwner('');
     setDate('');
     setInitialValue(0);
