@@ -9,7 +9,7 @@ const HomePage: React.FC = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Gerenciamento de Investimentos</h1>
       <Link href="/investments/create">
-        <button className="px-4 py-2 bg-indigo-600 text-white rounded-md">
+        <button className="mb-4 px-4 py-2 bg-indigo-600 text-white rounded-md">
           Criar Novo Investimento
         </button>
       </Link>
