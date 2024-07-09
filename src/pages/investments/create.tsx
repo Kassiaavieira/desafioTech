@@ -12,8 +12,6 @@ const CreateInvestmentPage: React.FC = () => {
   const [investments, setInvestments] = useState<Investment[]>([]);
 
   const addInvestment = (investment: Investment) => {
-    console.log('Novo investimento:', investment);
-
     setInvestments([...investments, investment]);
   };
 

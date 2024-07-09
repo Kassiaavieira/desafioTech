@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { Investment } from '../../types';
 
@@ -6,14 +6,17 @@ interface InvestmentListProps {
   investments: Investment[];
 }
 
-const InvestmentList: React.FC<InvestmentListProps> = ({ investments }) => {
+const InvestmentList: React.FC<InvestmentListProps> = React.memo(({ investments }) => {
   const router = useRouter();
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentInvestments = investments.slice(indexOfFirstItem, indexOfLastItem);
+
+  const currentInvestments = useMemo(() => {
+    return investments.slice(indexOfFirstItem, indexOfLastItem);
+  }, [investments, indexOfFirstItem, indexOfLastItem]);
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
@@ -46,7 +49,7 @@ const InvestmentList: React.FC<InvestmentListProps> = ({ investments }) => {
         <tbody>
           {currentInvestments.map((inv, index) => (
             <tr
-              key={index}
+              key={inv.id}
               className={`odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700`}
             >
               <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -109,6 +112,8 @@ const InvestmentList: React.FC<InvestmentListProps> = ({ investments }) => {
       </div>
     </div>
   );
-};
+});
+
+InvestmentList.displayName = 'InvestmentList';
 
 export default InvestmentList;

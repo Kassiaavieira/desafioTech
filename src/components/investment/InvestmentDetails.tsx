@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { Investment } from '../../types';
 import Button from '../ui/Button';
@@ -18,13 +18,19 @@ const InvestmentDetails: React.FC = () => {
   const expectedBalanceChartInstance = useRef<Chart<'line'> | null>(null);
   const withdrawalHistoryChartInstance = useRef<Chart<'bar'> | null>(null);
 
+  const investmentAgeInYears = useMemo(() => {
+    if (investment) {
+      return getInvestmentAge(investment.date);
+    }
+    return 0;
+  }, [investment]);
+
   useEffect(() => {
     if (typeof id === 'string') {
       const selectedInvestment = mockInvestments.find(inv => inv.id === id);
       if (selectedInvestment) {
         setInvestment(selectedInvestment);
 
-        const investmentAgeInYears = getInvestmentAge(selectedInvestment.date);
         const calculatedBalance = calculateExpectedBalance(selectedInvestment.initialValue, 0.0052, investmentAgeInYears);
         setExpectedBalance(calculatedBalance);
 
@@ -45,7 +51,7 @@ const InvestmentDetails: React.FC = () => {
     } else {
       console.error("ID is not a string:", id);
     }
-  }, [id]);
+  }, [id, investmentAgeInYears]);
 
   useEffect(() => {
     if (investment) {
