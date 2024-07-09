@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { Investment } from '../../types';
-import Pagination from '../ui/Pagination/Pagination';
-import InvestmentTable from '../ui/Table/InvestmentTable';
+import { Investment } from '../../../types';
+import Pagination from '../../ui/Pagination/Pagination';
+import InvestmentTable from '../../ui/Table/InvestmentTable';
 
 interface InvestmentListProps {
   investments: Investment[];

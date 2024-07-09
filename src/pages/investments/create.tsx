@@ -1,6 +1,6 @@
 // src/pages/investments/create.tsx
 import React, { useState } from 'react';
-import CreateInvestmentForm from '../../components/investment/CreateInvestmentForm';
+import CreateInvestmentForm from '../../components/investment/CreateInvestment/CreateInvestmentForm';
 
 interface Investment {
   owner: string;

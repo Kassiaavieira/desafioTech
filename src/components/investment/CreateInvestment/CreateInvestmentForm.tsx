@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import TextInput from '../ui/Input/TextInput';
+import TextInput from '../../ui/Input/TextInput';
 
 interface CreateInvestmentFormProps {
   addInvestment: (investment: any) => void;

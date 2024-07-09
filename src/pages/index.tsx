@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import Link from 'next/link';
-import InvestmentList from '../components/investment/InvestmentList';
+import InvestmentList from '../components/investment/InvestmentList/InvestmentList';
 import { mockInvestments } from '../mocks/investmentData';
 
 const HomePage: React.FC = () => {

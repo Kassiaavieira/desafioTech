@@ -1,5 +1,5 @@
 import React from 'react';
-import InvestmentDetails from '../../components/investment/InvestmentDetails';
+import InvestmentDetails from '../../components/investment/InvestimentDetails/InvestmentDetails';
 
 const InvestmentDetailsPage: React.FC = () => {
   return (
