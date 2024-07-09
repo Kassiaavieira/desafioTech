@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { Investment } from '../../types';
 
 interface InvestmentListProps {
@@ -6,8 +7,9 @@ interface InvestmentListProps {
 }
 
 const InvestmentList: React.FC<InvestmentListProps> = ({ investments }) => {
+  const router = useRouter();
   const itemsPerPage = 5;
-  const [currentPage, setCurrentPage] = React.useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -16,6 +18,11 @@ const InvestmentList: React.FC<InvestmentListProps> = ({ investments }) => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const totalPages = Math.ceil(investments.length / itemsPerPage);
+
+  const handleDetailsClick = (investmentId: string) => {
+    console.log(investmentId);
+    router.push(`/investments/${investmentId}`);
+  };
 
   return (
     <div className="overflow-x-auto shadow-md rounded-lg mb-4">
@@ -48,12 +55,12 @@ const InvestmentList: React.FC<InvestmentListProps> = ({ investments }) => {
               <td className="px-6 py-4">{inv.date}</td>
               <td className="px-6 py-4">R$ {inv.initialValue}</td>
               <td className="px-6 py-4">
-                <a
-                  href="#"
+                <button
+                  onClick={() => handleDetailsClick(inv.id)}
                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline inline-block mb-1 mr-1"
                 >
                   Detalhes
-                </a>
+                </button>
               </td>
             </tr>
           ))}

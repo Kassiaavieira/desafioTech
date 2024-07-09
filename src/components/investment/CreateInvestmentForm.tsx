@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 
 interface CreateInvestmentFormProps {
   addInvestment: (investment: any) => void;
 }
 
 const CreateInvestmentForm: React.FC<CreateInvestmentFormProps> = ({ addInvestment }) => {
+  const router = useRouter();
   const [owner, setOwner] = useState('');
   const [date, setDate] = useState('');
   const [initialValue, setInitialValue] = useState('');
@@ -39,6 +41,10 @@ const CreateInvestmentForm: React.FC<CreateInvestmentFormProps> = ({ addInvestme
     setOwner('');
     setDate('');
     setInitialValue('');
+  };
+
+  const handleBackButtonClick = () => {
+    router.push('/');
   };
 
   return (
@@ -83,7 +89,10 @@ const CreateInvestmentForm: React.FC<CreateInvestmentFormProps> = ({ addInvestme
           <p className="mt-1 text-red-500 text-sm">{initialValueError}</p>
         )}
       </div>
-      <button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded-md">Criar Investimento</button>
+      <div className="flex justify-between">
+        <button type="button" onClick={handleBackButtonClick} className="px-4 py-2 bg-gray-500 text-white rounded-md">Voltar</button>
+        <button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded-md">Criar Investimento</button>
+      </div>
     </form>
   );
 };
