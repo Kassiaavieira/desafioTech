@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { Investment } from '../../types';
-import Button from '../ui/Button';
+import Button from '../ui/Button/Button';
 import { mockInvestments } from '@/src/mocks/investmentData';
 import { calculateExpectedBalance, calculateTotalTax } from '../../utils/calculations';
 import Chart from 'chart.js/auto';
