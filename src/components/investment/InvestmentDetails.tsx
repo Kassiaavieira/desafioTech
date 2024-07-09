@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { Investment } from '../../types';
 import Button from '../ui/Button';
 import { mockInvestments } from '@/src/mocks/investmentData';
 import { calculateExpectedBalance, calculateTotalTax } from '../../utils/calculations';
+import Chart from 'chart.js/auto';
 
 const InvestmentDetails: React.FC = () => {
   const router = useRouter();
@@ -12,6 +13,10 @@ const InvestmentDetails: React.FC = () => {
   const [expectedBalance, setExpectedBalance] = useState(0);
   const [totalTax, setTotalTax] = useState(0);
   const [withdrawalHistory, setWithdrawalHistory] = useState<{ date: string, amount: number }[]>([]);
+  const expectedBalanceChartRef = useRef<HTMLCanvasElement | null>(null);
+  const withdrawalHistoryChartRef = useRef<HTMLCanvasElement | null>(null);
+  const expectedBalanceChartInstance = useRef<Chart<'line'> | null>(null);
+  const withdrawalHistoryChartInstance = useRef<Chart<'bar'> | null>(null);
 
   useEffect(() => {
     if (typeof id === 'string') {
@@ -42,8 +47,91 @@ const InvestmentDetails: React.FC = () => {
     }
   }, [id]);
 
+  useEffect(() => {
+    if (investment) {
+      renderExpectedBalanceChart(expectedBalance);
+      renderWithdrawalHistoryChart(withdrawalHistory);
+    }
+  }, [investment, expectedBalance, withdrawalHistory]);
+
   const handleBackButtonClick = () => {
     router.push('/');
+  };
+
+  const renderExpectedBalanceChart = (balance: number) => {
+    if (expectedBalanceChartRef.current && balance !== 0) {
+      if (expectedBalanceChartInstance.current) {
+        expectedBalanceChartInstance.current.destroy();
+      }
+      expectedBalanceChartInstance.current = new Chart(expectedBalanceChartRef.current, {
+        type: 'line',
+        data: {
+          labels: ['Hoje', 'Daqui a 1 ano', 'Daqui a 2 anos', 'Daqui a 3 anos', 'Daqui a 4 anos', 'Daqui a 5 anos'],
+          datasets: [{
+            label: 'Saldo Esperado',
+            data: [balance, balance * 1.1, balance * 1.2, balance * 1.3, balance * 1.4, balance * 1.5],
+            borderColor: 'blue',
+            borderWidth: 2,
+            fill: false,
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Valor (R$)'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Tempo'
+              }
+            }
+          }
+        }
+      });
+    }
+  };
+
+  const renderWithdrawalHistoryChart = (history: { date: string, amount: number }[]) => {
+    if (withdrawalHistoryChartRef.current && history.length > 0) {
+      if (withdrawalHistoryChartInstance.current) {
+        withdrawalHistoryChartInstance.current.destroy();
+      }
+      withdrawalHistoryChartInstance.current = new Chart(withdrawalHistoryChartRef.current, {
+        type: 'bar',
+        data: {
+          labels: history.map(item => item.date),
+          datasets: [{
+            label: 'Retiradas',
+            data: history.map(item => item.amount),
+            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Valor (R$)'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Data'
+              }
+            }
+          }
+        }
+      });
+    }
   };
 
   if (!investment) {
@@ -57,23 +145,27 @@ const InvestmentDetails: React.FC = () => {
       <p><strong>Proprietário:</strong> {investment.owner}</p>
       <p><strong>Data de Criação:</strong> {investment.date}</p>
       <p><strong>Valor Inicial:</strong> R$ {investment.initialValue}</p>
-      <p><strong>Saldo Esperado:</strong> R$ {expectedBalance.toFixed(2)}</p>
-      
-      {withdrawalHistory.length > 0 && (
-        <>
-          <p><strong>Imposto de Retiradas:</strong> R$ {totalTax.toFixed(2)}</p>
-          <div className="mt-4">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        <div>
+          <h3 className="text-lg font-bold mb-2">Gráfico de Saldo Esperado</h3>
+          <canvas id="expectedBalanceChart" ref={expectedBalanceChartRef} width={300} height={200}></canvas>
+        </div>
+
+        {withdrawalHistory.length > 0 && (
+          <div>
             <h3 className="text-lg font-bold mb-2">Histórico de Retiradas</h3>
-            <ul>
-              {withdrawalHistory.map((withdrawal, index) => (
-                <li key={index}>
-                  <strong>Data:</strong> {withdrawal.date} - <strong>Valor:</strong> R$ {withdrawal.amount.toFixed(2)}
-                </li>
-              ))}
-            </ul>
+            <canvas id="withdrawalHistoryChart" ref={withdrawalHistoryChartRef} width={300} height={200}></canvas>
           </div>
-        </>
-      )}
+        )}
+      </div>
+
+      <div className="mt-4">
+        <p><strong>Saldo Esperado:</strong> R$ {expectedBalance.toFixed(2)}</p>
+        {withdrawalHistory.length > 0 && (
+          <p><strong>Imposto de Retiradas:</strong> R$ {totalTax.toFixed(2)}</p>
+        )}
+      </div>
 
     </div>
   );

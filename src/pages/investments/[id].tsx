@@ -1,4 +1,3 @@
-// src/pages/investments/details.tsx
 import React from 'react';
 import InvestmentDetails from '../../components/investment/InvestmentDetails';
 
