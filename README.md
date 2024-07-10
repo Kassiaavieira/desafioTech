@@ -22,17 +22,17 @@ Para começar, siga os passos abaixo:
   yarn
 - **Executar em Ambiente de Desenvolvimento e Compilar para Produção:**
     # Ambiente de Desenvolvimento
+    ```bash
     npm run dev
-    # ou
     yarn dev
 
     # Compilar para Produção
+    ```bash
     npm run build
-    # ou
     yarn build
 - **Iniciar Servidor de Produção:**
+    ```bash
     npm start
-    # ou
     yarn start
 - **Testes e Storybook**
     Testes: Configurados com Jest (npm test ou yarn test).
