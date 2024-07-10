@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TechInvista
 
-## Getting Started
+## Visão Geral
 
-First, run the development server:
+Este é um projeto Next.js configurado com as seguintes bibliotecas e ferramentas para desenvolvimento:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Next.js** (v14.2.4): Framework React para renderização no servidor.
+- **React** (v18) e **React DOM** (v18): Bibliotecas principais para construção de interfaces.
+- **@fortawesome/free-solid-svg-icons** (v6.5.2) e **@fortawesome/react-fontawesome** (v0.2.2): Ícones SVG gratuitos para interfaces.
+- **chart.js** (v4.4.3): Biblioteca para criação de gráficos interativos.
+- **Tailwind CSS** (v3.4.4): Utilizado para estilização com classes utilitárias.
+- **TypeScript** (v5): Superset JavaScript para tipagem estática opcional.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuração
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Para começar, siga os passos abaixo:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Instalação de Dependências:**
+  ```bash
+  npm install
+  # ou
+  yarn
+- **Executar em Ambiente de Desenvolvimento e Compilar para Produção:**
+    # Ambiente de Desenvolvimento
+    npm run dev
+    # ou
+    yarn dev
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    # Compilar para Produção
+    npm run build
+    # ou
+    yarn build
+- **Iniciar Servidor de Produção:**
+    npm start
+    # ou
+    yarn start
+- **Testes e Storybook**
+    Testes: Configurados com Jest (npm test ou yarn test).
+    Storybook: Para desenvolvimento de componentes UI (npm run storybook ou yarn storybook).
+- **Documentação**
+    Para mais detalhes sobre configuração e uso deste projeto, consulte a documentação completa.
+    **Link**: https://kassiaavieira.github.io/desafioTech/?path=/docs/configure-your-project--docs
