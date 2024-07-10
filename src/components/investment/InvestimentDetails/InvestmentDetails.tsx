@@ -156,7 +156,7 @@ const InvestmentDetails: React.FC = () => {
         <p className="mb-2"><strong>Data de Criação:</strong> {investment.date}</p>
       </div>
 
-      <div className="flex justify-center space-x-20">
+      <div className="flex flex-wrap justify-center gap-4 md:space-x-20">
         <div className="bg-gradient-to-br from-green-200 to-green-300 border-l-4 border-green-500 text-black p-4 mb-4 rounded-md w-64 px-4">
           <div className="flex items-center mb-2">
             <FontAwesomeIcon icon={faMoneyBillAlt} className="w-6 h-6 mr-2" />
