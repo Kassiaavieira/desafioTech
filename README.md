@@ -36,6 +36,9 @@ Para começar, siga os passos abaixo:
     ```bash
     npm start
     yarn start
+- **Testes:**
+    ```bash
+    npm test
 - **Testes e Storybook**
     Testes: Configurados com Jest (npm test ou yarn test).
     Storybook: Para desenvolvimento de componentes UI (npm run storybook ou yarn storybook).
