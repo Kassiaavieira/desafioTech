@@ -21,13 +21,11 @@ Para começar, siga os passos abaixo:
   # ou
   yarn
 - **Executar em Ambiente de Desenvolvimento e Compilar para Produção:**
-    # Ambiente de Desenvolvimento
     ```bash
     npm run dev
     yarn dev
 
     # Compilar para Produção
-    ```bash
     npm run build
     yarn build
 - **Iniciar Servidor de Produção:**
