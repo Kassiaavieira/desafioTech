@@ -15,6 +15,10 @@ Este é um projeto Next.js configurado com as seguintes bibliotecas e ferramenta
 
 Para começar, siga os passos abaixo:
 
+- **Clonar o projeto:**
+  ```bash
+  git clone https://github.com/Kassiaavieira/desafioTech.git
+
 - **Instalação de Dependências:**
   ```bash
   npm install
