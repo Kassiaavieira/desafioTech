@@ -42,6 +42,8 @@ Para começar, siga os passos abaixo:
 - **Testes e Storybook**
     Testes: Configurados com Jest (npm test ou yarn test).
     Storybook: Para desenvolvimento de componentes UI (npm run storybook ou yarn storybook).
+- **Link do deploy**
+    https://invista-tech.vercel.app/
 - **Documentação**
     Para mais detalhes sobre configuração e uso deste projeto, consulte a documentação completa.
     **Link**: https://kassiaavieira.github.io/desafioTech/?path=/docs/configure-your-project--docs
