@@ -49,7 +49,7 @@ const CreateInvestmentForm: React.FC<CreateInvestmentFormProps> = ({ addInvestme
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 bg-white rounded shadow-md">
+    <form onSubmit={handleSubmit} className="p-4 bg-white rounded shadow-md mt-20">
       <TextInput
         id="owner"
         label="Proprietário"

@@ -23,12 +23,19 @@ describe('InvestmentDetails Component', () => {
   it('renders investment details correctly', () => {
     const { container } = render(<InvestmentDetails />);
 
-    const ownerElement = container.querySelector('p')?.textContent;
-    const creationDateElement = container.querySelectorAll('p')[1]?.textContent;
-    const initialValueElement = container.querySelectorAll('p')[2]?.textContent;
+    const detailsContainer = container.querySelector('.bg-gradient-to-br');
+    const ownerElement = detailsContainer?.querySelector('p:nth-of-type(2)');
+    const creationDateElement = detailsContainer?.querySelector('p:nth-of-type(3)');
+    const initialValueElement = container.querySelector('.flex div p:nth-of-type(2)');
 
-    expect(ownerElement).toContain('Proprietário: John Doe');
-    expect(creationDateElement).toContain('Data de Criação: 2023-01-01');
-    expect(initialValueElement).toContain('Valor Inicial: R$ 1000');
+    expect(ownerElement?.textContent).toContain('Proprietário: John Doe');
+    expect(creationDateElement?.textContent).toContain('Data de Criação: 2023-01-01');
+
+    const initialValueText = initialValueElement?.textContent || '';
+    const numericValueRegex = /R\$ (\d+(\.\d{2})?)/;
+    const match = initialValueText.match(numericValueRegex);
+    const numericValue = match ? match[1] : '';
+
+    expect(numericValue).toEqual('1000');
   });
 });

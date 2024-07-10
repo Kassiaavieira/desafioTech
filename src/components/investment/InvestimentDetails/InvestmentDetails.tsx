@@ -5,6 +5,8 @@ import Button from '../../ui/Button/Button';
 import { mockInvestments } from '../../../mocks/investmentData';
 import { calculateExpectedBalance, calculateTotalTax } from '../../../utils/calculations';
 import Chart from 'chart.js/auto';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoneyBillAlt } from '@fortawesome/free-solid-svg-icons';
 
 const InvestmentDetails: React.FC = () => {
   const router = useRouter();
@@ -114,8 +116,8 @@ const InvestmentDetails: React.FC = () => {
           datasets: [{
             label: 'Retiradas',
             data: history.map(item => item.amount),
-            backgroundColor: 'rgba(255, 99, 132, 0.6)',
-            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: '#13da87',
+            borderColor: '#63ff92',
             borderWidth: 1
           }]
         },
@@ -147,10 +149,38 @@ const InvestmentDetails: React.FC = () => {
   return (
     <div className="p-4 bg-white rounded shadow-md">
       <Button onClick={handleBackButtonClick} text="Voltar" />
-      <h2 className="text-xl font-bold mb-4">Detalhes do Investimento</h2>
-      <p><strong>Proprietário:</strong> {investment.owner}</p>
-      <p><strong>Data de Criação:</strong> {investment.date}</p>
-      <p><strong>Valor Inicial:</strong> R$ {investment.initialValue}</p>
+      <h2 className="text-4xl font-bold mb-4 text-center">Detalhes do Investimento</h2>
+      <div className="bg-gradient-to-br from-green-50 to-green-50 p-4 mb-4 mt-6 rounded-md">
+        <p className="text-lg font-semibold mb-2"><strong>Detalhes do Investimento</strong></p>
+        <p className="mb-2"><strong>Proprietário:</strong> {investment.owner}</p>
+        <p className="mb-2"><strong>Data de Criação:</strong> {investment.date}</p>
+      </div>
+
+      <div className="flex justify-center space-x-20">
+        <div className="bg-gradient-to-br from-green-200 to-green-300 border-l-4 border-green-500 text-black p-4 mb-4 rounded-md w-64 px-4">
+          <div className="flex items-center mb-2">
+            <FontAwesomeIcon icon={faMoneyBillAlt} className="w-6 h-6 mr-2" />
+          </div>
+          <p className="text-xl font-bold">Valor Inicial:</p>
+          <p className="text-2xl font-semibold">R$ {investment.initialValue}</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-green-300 to-green-400 border-l-4 border-green-600 text-black p-4 mb-4 rounded-md w-64 px-4">
+          <div className="flex items-center mb-2">
+            <FontAwesomeIcon icon={faMoneyBillAlt} className="w-6 h-6 mr-2" />
+          </div>
+          <p className="text-xl font-bold">Saldo Esperado:</p>
+          <p className="text-2xl font-semibold">R$ {expectedBalance.toFixed(2)}</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-green-400 to-green-500 border-l-4 border-green-700 text-black p-4 mb-4 rounded-md w-64 px-4">
+          <div className="flex items-center mb-2">
+            <FontAwesomeIcon icon={faMoneyBillAlt} className="w-6 h-6 mr-2" />
+          </div>
+          <p className="text-xl font-bold">Imposto de Retiradas:</p>
+          <p className="text-2xl font-semibold">R$ {totalTax.toFixed(2)}</p>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
         <div>
@@ -165,14 +195,6 @@ const InvestmentDetails: React.FC = () => {
           </div>
         )}
       </div>
-
-      <div className="mt-4">
-        <p><strong>Saldo Esperado:</strong> R$ {expectedBalance.toFixed(2)}</p>
-        {withdrawalHistory.length > 0 && (
-          <p><strong>Imposto de Retiradas:</strong> R$ {totalTax.toFixed(2)}</p>
-        )}
-      </div>
-
     </div>
   );
 };

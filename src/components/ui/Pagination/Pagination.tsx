@@ -27,7 +27,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, pagina
             onClick={() => paginate(i + 1)}
             className={`px-3 py-1 border ${
               currentPage === i + 1
-                ? 'bg-blue-600 dark:bg-blue-500 text-white'
+                ? 'bg-customGreen dark:bg-blue-500 text-white'
                 : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >

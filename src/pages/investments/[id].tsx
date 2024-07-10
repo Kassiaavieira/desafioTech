@@ -3,8 +3,10 @@ import InvestmentDetails from '../../components/investment/InvestimentDetails/In
 
 const InvestmentDetailsPage: React.FC = () => {
   return (
-    <div className="container mx-auto p-4">
-      <InvestmentDetails />
+    <div className="min-h-screen bg-gradient-to-b from-white to-customGreen-light">
+      <div className="container mx-auto p-4">
+        <InvestmentDetails />
+      </div>
     </div>
   );
 };

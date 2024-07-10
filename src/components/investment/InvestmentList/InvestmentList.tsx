@@ -29,7 +29,7 @@ const InvestmentList: React.FC<InvestmentListProps> = React.memo(({ investments 
   };
 
   return (
-    <div className="overflow-x-auto shadow-md rounded-lg mb-4">
+    <div className="overflow-x-auto shadow-inner rounded-lg mb-4">
       <InvestmentTable investments={currentInvestments} handleDetailsClick={handleDetailsClick} />
       <div className="mb-4 mr-4 flex justify-end mt-4">
         <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
